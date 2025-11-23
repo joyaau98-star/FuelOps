@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Vehículos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fo-page">
+  <h1 class="fo-title">Fleet Overview</h1>
+  <p class="fo-subtitle">Selecciona tu vehículo para empezar jornada</p>
+
+  <div class="fo-vehicle-list">
+    <ion-item
+      button
+      lines="none"
+      class="fo-vehicle-card"
+      *ngFor="let vehicle of (vehicles$ | async)!"
+      (click)="onSelectVehicle(vehicle)"
+    >
+      <!-- Icono izquierda -->
+      <div class="fo-vehicle-icon" slot="start">
+        <ion-icon name="car-outline"></ion-icon>
+      </div>
+
+      <!-- Info central -->
+      <div class="fo-vehicle-info">
+        <div class="fo-vehicle-name">
+          {{ vehicle.name }}
+        </div>
+
+        <!-- Barra de combustible -->
+        <div class="fo-fuel-row">
+          <div class="fo-fuel-bar">
+            <div
+              class="fo-fuel-bar-fill"
+              [style.width.%]="vehicle.lastFuelPct || 50"
+            ></div>
+          </div>
+          <span class="fo-fuel-pct">
+            {{ vehicle.lastFuelPct || 50 }}%
+          </span>
+        </div>
+
+        <!-- Último kilometraje -->
+        <div class="fo-last-mileage">
+          Last Mileage:
+          <span>{{ vehicle.lastOdometer || 0 | number: '1.0-0' }}</span>
+        </div>
+      </div>
+
+      <!-- Botón derecha -->
+      <div class="fo-vehicle-actions" slot="end">
+        <button
+          type="button"
+          class="fo-details-btn"
+          (click)="onSelectVehicle(vehicle); $event.stopPropagation()"
+        >
+          Ver detalles
+        </button>
+      </div>
+    </ion-item>
+  </div>
+</ion-content>

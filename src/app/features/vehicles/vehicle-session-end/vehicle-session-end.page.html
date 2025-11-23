@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fin de jornada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="title">
+    Finalizar jornada para: {{ vehicleName }}
+  </h2>
+
+  <div class="vehicle-card">
+    <img
+      [src]="photoUrl || fallbackImage"
+      alt="Foto del vehículo"
+      class="vehicle-image"
+    />
+  </div>
+
+  <form [formGroup]="form" class="form">
+    <label>Odómetro final (km)</label>
+    <ion-input
+      type="number"
+      inputmode="numeric"
+      formControlName="endOdometer">
+    </ion-input>
+    <div class="error" *ngIf="endOdometerCtrl?.touched && endOdometerCtrl?.invalid">
+      Ingresa un odómetro válido.
+    </div>
+
+    <label>% Combustible final</label>
+    <ion-input
+      type="number"
+      inputmode="numeric"
+      formControlName="endFuelPct">
+    </ion-input>
+    <div class="error" *ngIf="endFuelPctCtrl?.touched && endFuelPctCtrl?.invalid">
+      Debe ser un valor entre 0 y 100.
+    </div>
+
+    <ion-button expand="block" class="mt" (click)="saveEnd()">
+      GUARDAR FIN DE JORNADA
+    </ion-button>
+  </form>
+</ion-content>

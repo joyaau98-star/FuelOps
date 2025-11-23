@@ -1,0 +1,265 @@
+.session-open-page {
+  --background: #050509;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+/* Título */
+.session-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.session-open-page {
+  --background: #050509;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+/* Título */
+.session-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 18px;
+}
+
+/* CONTENEDOR GENERAL */
+.road-wrapper {
+  margin: 0 auto 16px;
+  max-width: 360px;
+}
+
+/* ===== AUTO ESTILO SUV MODERNO (AZUL + BLANCO + CIAN) ===== */
+
+.car {
+  position: relative;
+  width: 140px;
+  height: 56px;
+  background: linear-gradient(135deg, #1d4ed8, #22d3ee); /* azul + cian */
+  border-radius: 18px 26px 16px 16px;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.9),
+    0 0 18px rgba(34, 211, 238, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: car-loop 2s ease-in-out infinite;
+}
+
+/* techo tipo SUV cerrado */
+.car-top {
+  position: absolute;
+  left: 20px;
+  top: -16px;
+  width: 80px;
+  height: 30px;
+  border-radius: 22px 28px 8px 8px;
+  background: linear-gradient(135deg, #0b1120, #020617);
+}
+
+/* ventana amplia */
+.car-window {
+  position: absolute;
+  left: 30px;
+  top: -11px;
+  width: 60px;
+  height: 22px;
+  border-radius: 12px 16px 6px 6px;
+  background: linear-gradient(135deg, #eff6ff, #93c5fd);
+  box-shadow: 0 0 8px rgba(148, 163, 184, 0.8);
+}
+
+/* líneas laterales (detalle puerta y faldón) */
+.car-door-line {
+  position: absolute;
+  left: 55px;
+  top: 16px;
+  width: 2px;
+  height: 22px;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.car-side-line {
+  position: absolute;
+  left: 24px;
+  right: 18px;
+  bottom: 10px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+
+
+/* ===== RUEDAS CON RAYOS BLANCOS ===== */
+
+.car-wheel {
+  position: absolute;
+  bottom: -12px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #020617;
+  box-shadow: 0 0 0 3px #0f172a;
+  overflow: hidden;
+}
+
+.car-wheel::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #ffffff 0, #e5e7eb 35%, #111827 100%);
+}
+
+/* efecto de rayos */
+.car-wheel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0 6px,
+    rgba(15, 23, 42, 0.8) 6px 10px
+  );
+  mix-blend-mode: multiply;
+}
+
+.car-wheel--back {
+  left: 24px;
+  animation: wheel-spin 0.6s linear infinite;
+}
+
+.car-wheel--front {
+  right: 26px;
+  animation: wheel-spin 0.6s linear infinite;
+}
+
+/* ===== HUMO DEL ESCAPE ===== */
+
+.car-smoke {
+  position: absolute;
+  left: -16px;
+  bottom: -2px;
+  width: 20px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(209, 213, 219, 0.95), transparent 70%);
+  opacity: 0;
+}
+
+
+.car-smoke--2 {
+  animation: smoke-puff 1.3s ease-out infinite;
+  animation-delay: 0.45s;
+}
+
+/* ============================
+   AUTO ANIMADO – SESSION OPEN
+   ============================ */
+
+.car {
+  --car-speed: 4.5s;
+
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 130px;
+  height: 56px;
+
+  background: linear-gradient(90deg, #0d47a1, #42a5f5);
+  border-radius: 12px 18px 10px 10px;
+  box-shadow:
+    0 8px 0px rgba(0,0,0,0.4),
+    1px 5px 0px rgba(255,245,157,0.7),   /* luz delantera */
+    -5px 0px 1px rgba(255,82,82,0.7);    /* luz trasera */
+
+  /* 🚗 Nuevo inicio fuera de pantalla */
+  transform: translateX(-50vw);
+
+  animation: car-move var(--car-speed) linear infinite;
+  z-index: 3;
+}
+
+
+
+
+
+/* Animación del auto */
+@keyframes car-move {
+  0% {
+    transform: translateX(-50vw);
+  }
+  100% {
+    transform: translateX(140vw);
+  }
+}
+
+/* Animación del humo */
+@keyframes smoke-move {
+  0% {
+    opacity: 0.9;
+    transform: translateX(-10px) scale(0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-40px) scale(1.4);
+  }
+}
+
+
+/* ===== ANIMACIONES ===== */
+
+@keyframes car-loop {
+  0% {
+    transform: translateX(120%) translateY(0);
+  }
+  50% {
+    transform: translateX(-22%) translateY(-2px);
+  }
+  100% {
+    transform: translateX(120%) translateY(0);
+  }
+}
+
+@keyframes wheel-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes smoke-puff {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  40% {
+    opacity: 0.9;
+    transform: translate(-8px, -8px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-18px, -16px) scale(1.35);
+  }
+}
+
+/* nombre + botón */
+.vehicle-name {
+  margin-top: 8px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.end-btn {
+  margin: 0 auto;
+  max-width: 260px;
+}
+

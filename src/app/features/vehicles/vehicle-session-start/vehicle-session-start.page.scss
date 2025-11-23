@@ -1,0 +1,270 @@
+.page-start {
+  --background: #050509;
+  color: #f5f5f5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+/* --------- FLEET OVERVIEW --------- */
+
+.fleet-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 4px 0 14px;
+}
+
+/* contenedor lista */
+.fleet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* cada fila */
+.fleet-row {
+  position: relative;
+  background: radial-gradient(circle at top left, #222430, #12131a 55%);
+  border-radius: 18px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+/* ligera “glow” a la izquierda */
+.fleet-row::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  background: radial-gradient(circle at left, rgba(247, 138, 29, 0.35), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.fleet-row:hover::before {
+  opacity: 1;
+}
+
+/* ---------- icono / foto ---------- */
+
+.fleet-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fleet-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.55);
+}
+
+.fleet-thumb-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #262a39, #161823);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/* ---------- info central ---------- */
+
+.fleet-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fleet-name {
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+/* barra combustible + % */
+.fleet-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fuel-bar {
+  flex: 1;
+  height: 7px;
+  border-radius: 999px;
+  background: #262838;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.fuel-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f78a1d, #ffd76b);
+  box-shadow: 0 0 12px rgba(247, 138, 29, 0.7);
+  transition: width 0.25s ease-out;
+}
+
+.fuel-percent {
+  min-width: 42px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* texto secundario */
+.fleet-sub {
+  font-size: 0.78rem;
+  color: #c3c7d8;
+  opacity: 0.9;
+}
+
+/* ---------- botón derecho ---------- */
+
+.fleet-actions {
+  display: flex;
+  align-items: center;
+}
+
+.fleet-actions ion-button {
+  --border-radius: 999px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --border-color: #f78a1d;
+  --color: #f9f1e4;
+  --background: transparent;
+  --background-hover: rgba(247, 138, 29, 0.1);
+  border-width: 1px;
+}
+
+/* --------- PANEL DE INICIO --------- */
+
+.panel {
+  margin-top: 22px;
+  background: #10111a;
+  border-radius: 20px;
+  padding: 16px 16px 18px;
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.panel-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.panel-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panel-header-info {
+  font-size: 0.88rem;
+  color: #d7daec;
+  display: grid;
+  gap: 2px;
+}
+
+/* formulario */
+
+.panel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.segment-label {
+  margin: 8px 0 2px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.mt {
+  margin-top: 14px;
+}
+
+/* ion tweaks */
+
+ion-item {
+  --background: transparent;
+  --color: #f5f5f5;
+  padding-left: 0;
+}
+
+ion-input {
+  --background: #181a26;
+  --border-radius: 12px;
+  --padding-start: 10px;
+  margin-top: 4px;
+}
+
+/* --------- responsive --------- */
+
+@media (max-width: 600px) {
+  .fleet-row {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .fleet-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+}
+
+ion-segment.site-segment {
+  --background: transparent;
+}
+
+ion-segment.site-segment ion-segment-button {
+  position: relative;
+  flex: 1 1 0;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+}
+
+ion-segment.site-segment ion-segment-button.segment-button-checked::after,
+ion-segment.site-segment ion-segment-button.ion-activated::after,
+ion-segment.site-segment ion-segment-button[aria-selected="true"]::after,
+ion-segment.site-segment ion-segment-button[aria-pressed="true"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background: #4c8dff;
+  border-radius: 100px;
+}
+
+ion-segment.site-segment ion-segment-button[disabled] {
+  opacity: 0.35;
+}

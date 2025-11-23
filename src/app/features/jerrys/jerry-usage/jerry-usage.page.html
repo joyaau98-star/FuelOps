@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Jerry usage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="card">
+    <div class="vehicle-icon">🚐</div>
+    <h2 class="vehicle-name">{{ vehicleName }}</h2>
+
+    <div class="fuel-section">
+      <div>Current Fuel: <b>{{ fuelAfterPct }}%</b></div>
+    </div>
+
+    <div class="jerry-section">
+      <h3>JERRY USAGE</h3>
+
+      <div class="jerry-buttons">
+        <ion-button size="small" (click)="addJerry(1)">+1 Jerry</ion-button>
+        <ion-button size="small" (click)="addJerry(2)">+2 Jerrys</ion-button>
+        <ion-button size="small" fill="outline" (click)="addJerry(-1)">-1</ion-button>
+      </div>
+
+      <div class="jerry-count">
+        Total jerrys a usar: <b>{{ jerryCount }}</b>
+        <p style="margin-top: 10px; font-size: 16px; color: #ddd;">
+  Final Fuel: <strong>{{ finalPctPreview }}%</strong>
+</p>
+
+      </div>
+    </div>
+
+    <ion-button expand="block" class="mt" (click)="saveReport()">
+      SAVE REPORT
+    </ion-button>
+  </div>
+</ion-content>

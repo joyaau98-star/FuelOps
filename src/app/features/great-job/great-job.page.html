@@ -1,0 +1,30 @@
+<ion-content class="ion-padding great-job-page">
+  <div class="gj-container">
+    <div class="confetti"></div>
+
+    <div class="car-wrap">
+      <div class="car-icon">🚐</div>
+    </div>
+
+    <h1 class="gj-title">Great job!</h1>
+
+    <!-- Texto principal -->
+    <p class="gj-text" *ngIf="fromJerry; else noJerryMsg">
+      Your jerry report has been saved successfully.
+    </p>
+    <ng-template #noJerryMsg>
+      <p class="gj-text">
+        Your report has been saved successfully.
+      </p>
+    </ng-template>
+
+    <!-- Texto secundario -->
+    <p class="gj-sub" *ngIf="fromJerry; else logoutMsg">
+      Logging out...
+    </p>
+    <ng-template #logoutMsg>
+      <p class="gj-sub">Logging out...</p>
+    </ng-template>
+
+  </div>
+</ion-content>

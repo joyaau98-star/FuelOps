@@ -1,0 +1,174 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inicio de jornada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding page-start">
+
+  <!-- FLEET OVERVIEW PREMIUM -->
+  <ng-container *ngIf="!selected && !vehicleId">
+    <h2 class="fleet-title">Fleet Overview</h2>
+
+    <div class="fleet-list">
+      <div class="fleet-row" *ngFor="let v of (vehiclesWithStatus$ | async)!">
+
+        <!-- Icono / foto pequeña -->
+        <div class="fleet-icon-box">
+          <img *ngIf="v.photoUrl; else iconTpl"
+               [src]="v.photoUrl"
+               alt="vehicle"
+               class="fleet-thumb">
+          <ng-template #iconTpl>
+            <div class="fleet-thumb fleet-thumb-icon">🚐</div>
+          </ng-template>
+        </div>
+
+        <!-- Info central -->
+        <div class="fleet-main">
+          <div class="fleet-name">{{ v.name || 'Vehicle' }}</div>
+
+          <div class="fleet-bar-row">
+            <div class="fuel-bar">
+              <div class="fuel-bar-fill"
+                   [style.width.%]="v.lastFuelPct ?? 0"></div>
+            </div>
+            <span class="fuel-percent">{{ v.lastFuelPct ?? 0 }}%</span>
+          </div>
+
+          <div class="fleet-sub">
+            Last mileage: {{ v.lastOdometer ?? '—' }} km
+          </div>
+        </div>
+
+        <!-- Botón -->
+        <div class="fleet-actions">
+          <ion-button
+            size="small"
+            fill="outline"
+            [disabled]="v.isBusy"
+            (click)="!v.isBusy && selectVehicle(v)">
+            {{ v.isBusy ? 'VEHÍCULO EN USO' : 'SELECCIONAR VEHÍCULO' }}
+          </ion-button>
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+
+
+  <!-- Panel cuando venimos desde VIEW DETAILS con queryParams -->
+  <ng-container *ngIf="vehicleId && !selected">
+    <div class="panel">
+      <h3 class="panel-title">Inicio para: {{ vehicleName }}</h3>
+
+      <div class="panel-header">
+        <img *ngIf="photoUrl" [src]="photoUrl" class="panel-img" alt="vehicle">
+        <div class="panel-header-info">
+          <div><b>Placa:</b> {{ plate }}</div>
+          <div><b>Último odómetro:</b> {{ lastOdometer }} km</div>
+          <div><b>Combustible anterior:</b> {{ lastFuelPct }}%</div>
+          <div><b>Tipo combustible:</b> {{ fuelType }}</div>
+          <div><b>Sitio:</b> {{ siteId }}</div>
+        </div>
+      </div>
+
+      <form [formGroup]="form" class="panel-form">
+        <ion-item lines="none">
+          <ion-label position="stacked">Odómetro inicial (km)</ion-label>
+          <ion-input type="number" inputmode="numeric" formControlName="startOdometer"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">% Combustible inicial</ion-label>
+          <ion-input type="number" inputmode="numeric" formControlName="startFuelPct"></ion-input>
+        </ion-item>
+
+        <div class="segment-label">Sitio</div>
+        <ion-segment formControlName="site" class="site-segment" mode="md">
+          <ion-segment-button value="Omeo" disabled="true">
+            OME0
+          </ion-segment-button>
+
+          <ion-segment-button value="DinnerPlain">
+            DINNER PLAIN
+          </ion-segment-button>
+
+          <ion-segment-button value="MtHotham" disabled="true">
+            MT HOTHAM
+          </ion-segment-button>
+        </ion-segment>
+
+        <ion-button
+          type="button"
+          expand="block"
+          class="mt"
+          (click)="save()"
+          [disabled]="!form.valid || !isDinnerPlain">
+          Guardar inicio
+        </ion-button>
+
+      </form>
+    </div>
+  </ng-container>
+
+
+  <!-- Panel cuando seleccionas vehículo desde esta misma pantalla -->
+  <div class="panel" *ngIf="selected as s">
+    <h3 class="panel-title">Inicio para: {{ s.name }}</h3>
+
+    <div class="panel-header">
+      <img *ngIf="s.photoUrl" [src]="s.photoUrl" class="panel-img" alt="vehicle">
+      <div class="panel-header-info">
+        <div *ngIf="s.plate"><b>Placa:</b> {{ s.plate }}</div>
+        <div *ngIf="s.lastOdometer != null"><b>Último odómetro:</b> {{ s.lastOdometer }} km</div>
+        <div *ngIf="s.lastFuelPct != null"><b>Combustible anterior:</b> {{ s.lastFuelPct }}%</div>
+        <div><b>Tipo combustible:</b> {{ s.fuelType || '—' }}</div>
+      </div>
+
+      <ion-button *ngIf="isAdmin" size="small" class="photo-btn">
+        <label style="cursor:pointer">
+          Subir foto
+          <input type="file" accept="image/*" (change)="onPhotoSelected($event)" style="display:none">
+        </label>
+      </ion-button>
+    </div>
+
+    <form [formGroup]="form" class="panel-form">
+      <ion-item lines="none">
+        <ion-label position="stacked">Odómetro inicial (km)</ion-label>
+        <ion-input type="number" inputmode="numeric" formControlName="startOdometer"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">% Combustible inicial</ion-label>
+        <ion-input type="number" inputmode="numeric" formControlName="startFuelPct"></ion-input>
+      </ion-item>
+
+      <div class="segment-label">Sitio</div>
+      <ion-segment formControlName="site" class="site-segment" mode="md">
+        <ion-segment-button value="Omeo" disabled="true">
+          OME0
+        </ion-segment-button>
+
+        <ion-segment-button value="DinnerPlain">
+          DINNER PLAIN
+        </ion-segment-button>
+
+        <ion-segment-button value="MtHotham" disabled="true">
+          MT HOTHAM
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-button
+        type="button"
+        expand="block"
+        class="mt"
+        (click)="save()"
+        [disabled]="!form.valid || !isDinnerPlain">
+        Guardar inicio
+      </ion-button>
+    </form>
+  </div>
+
+</ion-content>

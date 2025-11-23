@@ -1,0 +1,48 @@
+<ion-content class="ion-padding session-open-page">
+
+  <h2 class="session-title">Driving...</h2>
+
+  <!-- ESCENA COMPLETA -->
+  <div class="road-wrapper">
+    <div class="scene">
+      <div class="road">
+        <!-- línea discontinua -->
+        <div class="road-line"></div>
+
+        <!-- AUTO ESTILO SUV -->
+        <div class="car suv">
+          <div class="car-top"></div>
+          <div class="car-window"></div>
+
+          <!-- detalles laterales -->
+          <div class="car-door-line"></div>
+          <div class="car-side-line"></div>
+
+          <!-- luces -->
+          <div class="car-front-light"></div>
+          <div class="car-back-light"></div>
+
+          <!-- ruedas -->
+          <div class="car-wheel car-wheel--back"></div>
+          <div class="car-wheel car-wheel--front"></div>
+
+          <!-- humo -->
+          <div class="car-smoke car-smoke--1"></div>
+          <div class="car-smoke car-smoke--2"></div>
+        </div>
+      </div>
+
+      <!-- césped inferior -->
+      <div class="grass"></div>
+    </div>
+  </div>
+
+  <div class="vehicle-name">
+    {{ vehicleName }}
+  </div>
+
+  <ion-button expand="block" class="end-btn" (click)="goToEndSession()">
+    DESEO FINALIZAR SESIÓN
+  </ion-button>
+
+</ion-content>
