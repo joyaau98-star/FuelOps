@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-  apiKey: "AIzaSyBcUnqORjtmsg3bDQGIXuSPtv6Fk5GLnDs",
+  apiKey: "",
   authDomain: "fuelops-control.firebaseapp.com",
   projectId: "fuelops-control",
   storageBucket: "fuelops-control.firebasestorage.app",
